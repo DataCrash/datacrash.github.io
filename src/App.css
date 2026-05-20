@@ -5,6 +5,24 @@
   padding: 4rem 1.25rem 3rem;
 }
 
+.topbar,
+.closing-note {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.topbar span,
+.closing-note span {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 0.55rem 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
 .shell::before,
 .shell::after {
   content: "";
@@ -56,6 +74,13 @@
   justify-content: space-between;
 }
 
+.hero-stack {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.3rem;
+}
+
 .hero-copy::before {
   content: "";
   position: absolute;
@@ -79,6 +104,35 @@
 .lede {
   max-width: 38rem;
   font-size: 1.05rem;
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.35rem;
+}
+
+.hero-metrics div,
+.proof-card {
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+}
+
+.hero-metrics div {
+  min-height: 6.5rem;
+  padding: 0.95rem;
+  display: grid;
+  align-content: space-between;
+  gap: 0.75rem;
+}
+
+.metric-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
 }
 
 .cta-row {
@@ -148,6 +202,26 @@
   color: var(--muted);
 }
 
+.proof-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.proof-card {
+  min-height: 10.5rem;
+  padding: 1.2rem;
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+}
+
+.proof-index {
+  font-size: 0.78rem;
+  font-family: var(--mono);
+  color: var(--accent-cool);
+}
+
 .routes {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -186,10 +260,16 @@
   padding: 1.6rem;
 }
 
+.closing-note {
+  justify-content: space-between;
+}
+
 @media (max-width: 980px) {
   .hero-grid,
   .manifesto,
-  .routes {
+  .routes,
+  .proof-strip,
+  .hero-metrics {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -208,6 +288,8 @@
     padding: 1.35rem;
   }
 
+  .hero-metrics,
+  .proof-strip,
   .routes,
   .manifesto {
     grid-template-columns: 1fr;
@@ -220,5 +302,9 @@
   .primary-link,
   .secondary-link {
     width: 100%;
+  }
+
+  .closing-note {
+    justify-content: flex-start;
   }
 }

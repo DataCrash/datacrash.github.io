@@ -3,33 +3,56 @@ import "./App.css";
 function App() {
   return (
     <main className="shell">
+      <section className="topbar" aria-label="Status do domínio raiz">
+        <span>Root Entry</span>
+        <span>GitHub Actions Live</span>
+        <span>Professional Signal Online</span>
+      </section>
+
       <section className="hero-grid">
         <div className="hero-copy">
-          <p className="eyebrow">datacrash.github.io</p>
-          <h1>Arquitetura, impacto visual e sinal profissional.</h1>
-          <p className="lede">
-            Presença raiz do ecossistema DataCrash. O objetivo aqui não é listar
-            tudo. É direcionar rápido para o que importa: narrativa
-            profissional, profundidade técnica e conversão em contato.
-          </p>
+          <div className="hero-stack">
+            <p className="eyebrow">datacrash.github.io</p>
+            <h1>Arquitetura, impacto visual e sinal profissional.</h1>
+            <p className="lede">
+              Presença raiz do ecossistema DataCrash. O objetivo aqui não é
+              listar tudo. É direcionar rápido para o que importa: narrativa
+              profissional, profundidade técnica e conversão em contato.
+            </p>
 
-          <div className="cta-row">
-            <a
-              className="primary-link"
-              href="https://datacrash.github.io/professional-hub/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Abrir Professional Hub
-            </a>
-            <a
-              className="secondary-link"
-              href="https://github.com/DataCrash/datacrash"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Ver README de perfil
-            </a>
+            <div className="hero-metrics" aria-label="Indicadores principais">
+              <div>
+                <span className="metric-label">Modo</span>
+                <strong>Root Gateway</strong>
+              </div>
+              <div>
+                <span className="metric-label">Deploy</span>
+                <strong>GitHub Pages + Actions</strong>
+              </div>
+              <div>
+                <span className="metric-label">Tráfego</span>
+                <strong>Hub, CVs, GitHub, LinkedIn</strong>
+              </div>
+            </div>
+
+            <div className="cta-row">
+              <a
+                className="primary-link"
+                href="https://datacrash.github.io/professional-hub/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Abrir Professional Hub
+              </a>
+              <a
+                className="secondary-link"
+                href="https://github.com/DataCrash/datacrash"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ver README de perfil
+              </a>
+            </div>
           </div>
         </div>
 
@@ -52,6 +75,33 @@ function App() {
             <strong>Hub, CV PT-BR, CV EN, GitHub</strong>
           </div>
         </aside>
+      </section>
+
+      <section className="proof-strip" aria-label="Prova operacional">
+        <div className="proof-card">
+          <span className="proof-index">01</span>
+          <strong>Hub premium publicado</strong>
+          <p>
+            Narrativa, dashboard, CVs e privacidade já expostos no domínio
+            público.
+          </p>
+        </div>
+        <div className="proof-card">
+          <span className="proof-index">02</span>
+          <strong>README de perfil ativo</strong>
+          <p>
+            Camada de identidade GitHub já conectada ao restante da presença
+            profissional.
+          </p>
+        </div>
+        <div className="proof-card">
+          <span className="proof-index">03</span>
+          <strong>Deploy por Actions validado</strong>
+          <p>
+            Publicação raiz corrigida para workflow próprio, sem servir fonte
+            crua do branch.
+          </p>
+        </div>
       </section>
 
       <section className="routes" aria-label="Rotas principais">
@@ -123,6 +173,12 @@ function App() {
           avaliar rápido.
         </p>
       </section>
+
+      <footer className="closing-note">
+        <span>DataCrash</span>
+        <span>Forward-only delivery</span>
+        <span>Root domain operational</span>
+      </footer>
     </main>
   );
 }
