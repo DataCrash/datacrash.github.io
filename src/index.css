@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap");
+
+:root {
+  --bg: #090909;
+  --panel: rgba(18, 18, 18, 0.88);
+  --text: #c3c7cb;
+  --text-h: #f3efe7;
+  --muted: #848990;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-soft: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --accent-warm: #ff7a18;
+  --accent-cool: #4fe1ff;
+  --accent-strong: #ffd29c;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  --sans: "Space Grotesk", "Segoe UI Variable Text", sans-serif;
+  --mono: "IBM Plex Mono", "Cascadia Code", monospace;
+  font: 18px/1.5 var(--sans);
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(255, 122, 24, 0.12), transparent 28%),
+    radial-gradient(
+      circle at bottom left,
+      rgba(79, 225, 255, 0.1),
+      transparent 35%
+    ),
+    linear-gradient(180deg, #0c0c0c 0%, #090909 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+#root {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+strong {
+  color: var(--text-h);
+}
+
+h1 {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(3rem, 7vw, 6.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw, 2.2rem);
+  line-height: 1.05;
+}
+
+p {
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  :root {
+    font-size: 16px;
+  }
+}
