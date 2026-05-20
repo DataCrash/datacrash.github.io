@@ -37,4 +37,3 @@ O deploy é feito via GitHub Actions para GitHub Pages.
 - `DataCrash/datacrash`: README especial do perfil GitHub
 - `DataCrash/datacrash.github.io`: landing root do domínio público
 - `DataCrash/professional-hub`: hub detalhado com dashboard, CVs e narrativa profissional
-
