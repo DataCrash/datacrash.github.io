@@ -52,7 +52,7 @@ const signalArtifacts = [
   "CV PT-BR orientado a triagem local",
   "Resume EN para posição internacional",
   "LinkedIn como validação pública complementar",
-  "Snake/README como camada viva do perfil",
+  "README e animacao do perfil como camada viva",
 ];
 
 const hiringRoutes = [
@@ -338,7 +338,7 @@ function App() {
             </article>
             <article>
               <span className="metric-label">Perfil</span>
-              <strong>README vivo + snake</strong>
+              <strong>README vivo + sinais ativos</strong>
             </article>
           </div>
 
@@ -558,7 +558,7 @@ function App() {
             <div className="signal-preview-head">
               <div>
                 <span className="metric-label">Profile Pulse</span>
-                <strong>Snake signal embedded</strong>
+                <strong>Profile pulse embedded</strong>
               </div>
               <span className="feed-badge">Synced from profile repo</span>
             </div>
