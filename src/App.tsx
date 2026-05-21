@@ -1,8 +1,58 @@
+import { useEffect, useRef } from "react";
 import "./App.css";
 
 function App() {
+  const shellRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const shell = shellRef.current;
+
+    if (!shell) {
+      return;
+    }
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const bounds = shell.getBoundingClientRect();
+      const x = event.clientX - bounds.left;
+      const y = event.clientY - bounds.top;
+      const percentX = (x / bounds.width) * 100;
+      const percentY = (y / bounds.height) * 100;
+      const tiltY = ((x / bounds.width) - 0.5) * 8;
+      const tiltX = (0.5 - y / bounds.height) * 6;
+
+      shell.style.setProperty("--mx", `${percentX}%`);
+      shell.style.setProperty("--my", `${percentY}%`);
+      shell.style.setProperty("--tilt-x", `${tiltX}`);
+      shell.style.setProperty("--tilt-y", `${tiltY}`);
+    };
+
+    const resetPointer = () => {
+      shell.style.setProperty("--mx", "50%");
+      shell.style.setProperty("--my", "18%");
+      shell.style.setProperty("--tilt-x", "0");
+      shell.style.setProperty("--tilt-y", "0");
+    };
+
+    resetPointer();
+    shell.addEventListener("pointermove", handlePointerMove);
+    shell.addEventListener("pointerleave", resetPointer);
+
+    return () => {
+      shell.removeEventListener("pointermove", handlePointerMove);
+      shell.removeEventListener("pointerleave", resetPointer);
+    };
+  }, []);
+
   return (
-    <main className="shell">
+    <main className="shell" ref={shellRef}>
+      <div className="cursor-veil" aria-hidden="true" />
+      <div className="forming-grid" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
+
       <section className="topbar" aria-label="Status do domínio raiz">
         <span>Root Entry</span>
         <span>GitHub Actions Live</span>
@@ -98,6 +148,53 @@ function App() {
             <strong>Hub, CV PT-BR, CV EN, GitHub</strong>
           </div>
         </aside>
+      </section>
+
+      <section className="assembly-map" aria-label="Interface em formação">
+        <div className="assembly-copy">
+          <p className="eyebrow">Interface em formação</p>
+          <h2>Uma navegação com cara de sistema vivo, não de vitrine estática.</h2>
+          <p>
+            O domínio raiz passa a se comportar como um roteador de sinal: cada
+            bloco responde ao movimento, reforça contexto e prepara a transição
+            para o hub principal sem poluir a leitura.
+          </p>
+        </div>
+
+        <div className="assembly-lane">
+          <article className="assembly-node">
+            <span className="assembly-step">01</span>
+            <h3>Entrada</h3>
+            <p>GitHub, LinkedIn e referências convergem para um ponto inicial comum.</p>
+            <div className="ghost-lines" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+          </article>
+
+          <article className="assembly-node assembly-node-accent">
+            <span className="assembly-step">02</span>
+            <h3>Leitura de sinal</h3>
+            <p>Headline, provas operacionais e rotas-chave aparecem antes do excesso.</p>
+            <div className="ghost-lines" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+          </article>
+
+          <article className="assembly-node">
+            <span className="assembly-step">03</span>
+            <h3>Aprofundamento</h3>
+            <p>O tráfego é empurrado para CVs, dashboard e ativos de confiança técnica.</p>
+            <div className="ghost-lines" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+          </article>
+        </div>
       </section>
 
       <section className="proof-strip" aria-label="Prova operacional">
