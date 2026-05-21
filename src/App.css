@@ -12,6 +12,35 @@
   gap: 0.75rem;
 }
 
+.transmission-band {
+  overflow: hidden;
+  border-block: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.transmission-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  padding: 0.7rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  color: var(--accent-cool);
+  animation: drift-strip 24s linear infinite;
+}
+
+.transmission-track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.transmission-track span::after {
+  content: "+";
+  color: var(--accent-warm);
+}
+
 .topbar span,
 .closing-note span {
   border: 1px solid var(--border);
@@ -79,6 +108,27 @@
   z-index: 1;
   display: grid;
   gap: 1.3rem;
+}
+
+.hero-alert {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: fit-content;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.8rem;
+  color: var(--text-h);
+}
+
+.hero-ping {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  background: var(--accent-cool);
+  box-shadow: 0 0 0 0 rgba(79, 225, 255, 0.65);
+  animation: signal-pulse 1.8s infinite;
 }
 
 .hero-copy::before {
@@ -264,6 +314,30 @@
   justify-content: space-between;
 }
 
+@keyframes drift-strip {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+@keyframes signal-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(79, 225, 255, 0.65);
+  }
+
+  70% {
+    box-shadow: 0 0 0 14px rgba(79, 225, 255, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(79, 225, 255, 0);
+  }
+}
+
 @media (max-width: 980px) {
   .hero-grid,
   .manifesto,
@@ -281,6 +355,10 @@
 @media (max-width: 720px) {
   .shell {
     padding: 1rem 0.9rem 2rem;
+  }
+
+  .transmission-track {
+    animation-duration: 18s;
   }
 
   .hero-copy {

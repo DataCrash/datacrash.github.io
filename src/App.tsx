@@ -9,10 +9,33 @@ function App() {
         <span>Professional Signal Online</span>
       </section>
 
+      <section className="transmission-band" aria-label="Transmissão ativa">
+        <div className="transmission-track">
+          <span>datacrash</span>
+          <span>root gateway</span>
+          <span>professional hub</span>
+          <span>signal routing</span>
+          <span>currículo pt-br</span>
+          <span>resume en</span>
+          <span>linkedin</span>
+          <span>github profile</span>
+          <span>datacrash</span>
+          <span>root gateway</span>
+          <span>professional hub</span>
+          <span>signal routing</span>
+        </div>
+      </section>
+
       <section className="hero-grid">
         <div className="hero-copy">
           <div className="hero-stack">
             <p className="eyebrow">datacrash.github.io</p>
+            <div className="hero-alert">
+              <span className="hero-ping" aria-hidden="true" />
+              <span>
+                Entrada primária para avaliação técnica e narrativa profissional
+              </span>
+            </div>
             <h1>Arquitetura, impacto visual e sinal profissional.</h1>
             <p className="lede">
               Presença raiz do ecossistema DataCrash. O objetivo aqui não é
