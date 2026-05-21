@@ -1,6 +1,40 @@
 import { useEffect, useRef } from "react";
 import "./App.css";
 
+const repositorySignals = [
+  {
+    index: "01",
+    label: "Root domain",
+    title: "datacrash.github.io",
+    description:
+      "Camada de entrada com roteamento rápido, presença visual e prova operacional.",
+    href: "https://datacrash.github.io/",
+  },
+  {
+    index: "02",
+    label: "Hub premium",
+    title: "professional-hub",
+    description:
+      "Dashboard técnico, storytelling profissional, privacidade e CVs em fluxo curto.",
+    href: "https://datacrash.github.io/professional-hub/",
+  },
+  {
+    index: "03",
+    label: "GitHub profile",
+    title: "datacrash",
+    description:
+      "README animado, sinais públicos e identidade complementar ao domínio raiz.",
+    href: "https://github.com/DataCrash/datacrash",
+  },
+];
+
+const signalArtifacts = [
+  "CV PT-BR orientado a triagem local",
+  "Resume EN para posição internacional",
+  "LinkedIn como validação pública complementar",
+  "Snake/README como camada viva do perfil",
+];
+
 function App() {
   const shellRef = useRef<HTMLElement | null>(null);
 
@@ -17,7 +51,7 @@ function App() {
       const y = event.clientY - bounds.top;
       const percentX = (x / bounds.width) * 100;
       const percentY = (y / bounds.height) * 100;
-      const tiltY = ((x / bounds.width) - 0.5) * 8;
+      const tiltY = (x / bounds.width - 0.5) * 8;
       const tiltX = (0.5 - y / bounds.height) * 6;
 
       shell.style.setProperty("--mx", `${percentX}%`);
@@ -183,7 +217,9 @@ function App() {
               <span className="feed-index">01</span>
               <div>
                 <strong>Root gateway</strong>
-                <p>Primeira leitura visual, prova operacional e rotas curtas.</p>
+                <p>
+                  Primeira leitura visual, prova operacional e rotas curtas.
+                </p>
               </div>
             </article>
 
@@ -191,7 +227,9 @@ function App() {
               <span className="feed-index">02</span>
               <div>
                 <strong>Professional hub</strong>
-                <p>Dashboard técnico, narrativa profissional e privacidade clara.</p>
+                <p>
+                  Dashboard técnico, narrativa profissional e privacidade clara.
+                </p>
               </div>
             </article>
 
@@ -199,7 +237,9 @@ function App() {
               <span className="feed-index">03</span>
               <div>
                 <strong>CV + GitHub profile</strong>
-                <p>Currículos, validação pública e ativos de confiança técnica.</p>
+                <p>
+                  Currículos, validação pública e ativos de confiança técnica.
+                </p>
               </div>
             </article>
           </div>
@@ -209,7 +249,9 @@ function App() {
       <section className="assembly-map" aria-label="Interface em formação">
         <div className="assembly-copy">
           <p className="eyebrow">Interface em formação</p>
-          <h2>Uma navegação com cara de sistema vivo, não de vitrine estática.</h2>
+          <h2>
+            Uma navegação com cara de sistema vivo, não de vitrine estática.
+          </h2>
           <p>
             O domínio raiz passa a se comportar como um roteador de sinal: cada
             bloco responde ao movimento, reforça contexto e prepara a transição
@@ -221,7 +263,10 @@ function App() {
           <article className="assembly-node">
             <span className="assembly-step">01</span>
             <h3>Entrada</h3>
-            <p>GitHub, LinkedIn e referências convergem para um ponto inicial comum.</p>
+            <p>
+              GitHub, LinkedIn e referências convergem para um ponto inicial
+              comum.
+            </p>
             <div className="ghost-lines" aria-hidden="true">
               <span />
               <span />
@@ -232,7 +277,10 @@ function App() {
           <article className="assembly-node assembly-node-accent">
             <span className="assembly-step">02</span>
             <h3>Leitura de sinal</h3>
-            <p>Headline, provas operacionais e rotas-chave aparecem antes do excesso.</p>
+            <p>
+              Headline, provas operacionais e rotas-chave aparecem antes do
+              excesso.
+            </p>
             <div className="ghost-lines" aria-hidden="true">
               <span />
               <span />
@@ -243,13 +291,73 @@ function App() {
           <article className="assembly-node">
             <span className="assembly-step">03</span>
             <h3>Aprofundamento</h3>
-            <p>O tráfego é empurrado para CVs, dashboard e ativos de confiança técnica.</p>
+            <p>
+              O tráfego é empurrado para CVs, dashboard e ativos de confiança
+              técnica.
+            </p>
             <div className="ghost-lines" aria-hidden="true">
               <span />
               <span />
               <span />
             </div>
           </article>
+        </div>
+      </section>
+
+      <section
+        className="surface-grid"
+        aria-label="Sinais vivos do ecossistema"
+      >
+        <div className="surface-panel">
+          <div className="surface-panel-head">
+            <p className="eyebrow">Repo Relay</p>
+            <span className="feed-badge">Demo layer</span>
+          </div>
+          <h2>Repositórios com função clara, não apenas presença estática.</h2>
+          <p>
+            Esta faixa demonstra uma direção para tornar o root mais vivo: cada
+            superfície entra como parte do sistema, com papel, profundidade e
+            comportamento próprios.
+          </p>
+
+          <div className="relay-lane">
+            {repositorySignals.map((signal) => (
+              <a
+                key={signal.title}
+                className="relay-card"
+                href={signal.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="relay-index">{signal.index}</span>
+                <span className="route-kicker">{signal.label}</span>
+                <strong>{signal.title}</strong>
+                <p>{signal.description}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="surface-panel surface-panel-accent">
+          <div className="surface-panel-head">
+            <p className="eyebrow">CV Signal</p>
+            <span className="feed-badge">Routing assets</span>
+          </div>
+          <h2>Ativos que sustentam a conversa de contratação.</h2>
+          <p>
+            Em vez de esconder o valor nos links, a home pode deixar explícito o
+            que cada artefato entrega e como ele conversa com o restante do
+            ecossistema.
+          </p>
+
+          <div className="artifact-list" aria-label="Ativos principais">
+            {signalArtifacts.map((artifact, index) => (
+              <article key={artifact} className="artifact-item">
+                <span className="artifact-bullet">0{index + 1}</span>
+                <p>{artifact}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
