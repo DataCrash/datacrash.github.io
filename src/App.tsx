@@ -694,8 +694,8 @@ function App() {
             <span className="route-kicker">Mercado global</span>
             <h2>Resume EN</h2>
             <p>
-              Resumo enxuto para posições internacionais, remotas e de senioridade
-              alta.
+              Resumo enxuto para posições internacionais, remotas e de
+              senioridade alta.
             </p>
           </a>
 
