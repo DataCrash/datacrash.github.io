@@ -43,7 +43,7 @@ const repositorySignals: RepositorySignalSeed[] = [
     title: "datacrash",
     description:
       "README animado, sinais públicos e identidade complementar ao domínio raiz.",
-    href: "https://github.com/DataCrash/datacrash",
+    href: "https://github.com/DataCrash",
     repository: "datacrash",
   },
 ];
@@ -76,6 +76,27 @@ const hiringRoutes = [
     title: "LinkedIn",
     href: "https://www.linkedin.com/in/datacrash/",
     note: "Contexto de carreira, networking e coerencia publica.",
+  },
+];
+
+const decisionVectors = [
+  {
+    index: "01",
+    title: "Leitura executiva",
+    description:
+      "O hub entrega narrativa, profundidade tecnica e contexto de lideranca em fluxo curto.",
+  },
+  {
+    index: "02",
+    title: "Triagem objetiva",
+    description:
+      "CV PT-BR e Resume EN ficam acessiveis sem obrigar o leitor a navegar demais.",
+  },
+  {
+    index: "03",
+    title: "Validacao publica",
+    description:
+      "GitHub e LinkedIn fecham a leitura com identidade, historico e sinais publicos coerentes.",
   },
 ];
 
@@ -262,6 +283,21 @@ function App() {
               profissional, profundidade técnica e conversão em contato.
             </p>
 
+            <div className="hero-flow" aria-label="Fluxo de leitura principal">
+              <article>
+                <span className="metric-label">Entrada</span>
+                <strong>Root gateway com leitura curta</strong>
+              </article>
+              <article>
+                <span className="metric-label">Leitura</span>
+                <strong>Provas, repositórios e CVs em sequência</strong>
+              </article>
+              <article>
+                <span className="metric-label">Saída</span>
+                <strong>Hub, perfil público e contato sem ruído</strong>
+              </article>
+            </div>
+
             <div className="hero-metrics" aria-label="Indicadores principais">
               <div>
                 <span className="metric-label">Modo</span>
@@ -288,11 +324,11 @@ function App() {
               </a>
               <a
                 className="secondary-link"
-                href="https://github.com/DataCrash/datacrash"
+                href="https://github.com/DataCrash"
                 target="_blank"
                 rel="noreferrer"
               >
-                Ver README de perfil
+                Abrir perfil GitHub
               </a>
             </div>
           </div>
@@ -379,6 +415,33 @@ function App() {
             </article>
           </div>
         </aside>
+      </section>
+
+      <section className="proof-strip" aria-label="Prova operacional">
+        <div className="proof-card">
+          <span className="proof-index">01</span>
+          <strong>Hub premium publicado</strong>
+          <p>
+            Narrativa, dashboard, CVs e privacidade já expostos no domínio
+            público.
+          </p>
+        </div>
+        <div className="proof-card">
+          <span className="proof-index">02</span>
+          <strong>Perfil GitHub ativo</strong>
+          <p>
+            A identidade pública já conversa com o restante do ecossistema sem
+            parecer uma peça isolada.
+          </p>
+        </div>
+        <div className="proof-card">
+          <span className="proof-index">03</span>
+          <strong>Deploy por Actions validado</strong>
+          <p>
+            O domínio raiz mantém publicação própria, previsível e alinhada ao
+            fluxo de atualização.
+          </p>
+        </div>
       </section>
 
       <section className="assembly-map" aria-label="Interface em formação">
@@ -582,33 +645,6 @@ function App() {
         </div>
       </section>
 
-      <section className="proof-strip" aria-label="Prova operacional">
-        <div className="proof-card">
-          <span className="proof-index">01</span>
-          <strong>Hub premium publicado</strong>
-          <p>
-            Narrativa, dashboard, CVs e privacidade já expostos no domínio
-            público.
-          </p>
-        </div>
-        <div className="proof-card">
-          <span className="proof-index">02</span>
-          <strong>README de perfil ativo</strong>
-          <p>
-            Camada de identidade GitHub já conectada ao restante da presença
-            profissional.
-          </p>
-        </div>
-        <div className="proof-card">
-          <span className="proof-index">03</span>
-          <strong>Deploy por Actions validado</strong>
-          <p>
-            Publicação raiz corrigida para workflow próprio, sem servir fonte
-            crua do branch.
-          </p>
-        </div>
-      </section>
-
       <section className="routes" aria-label="Rotas principais">
         <a
           className="route-card route-card-featured"
@@ -666,17 +702,57 @@ function App() {
         </a>
       </section>
 
-      <section className="manifesto">
-        <div>
-          <p className="eyebrow">Direção</p>
-          <h2>Menos ruído, mais intenção.</h2>
+      <section className="closing-grid" aria-label="Fechamento da jornada">
+        <div className="closing-panel closing-panel-primary">
+          <p className="eyebrow">Próximo passo</p>
+          <h2>Menos ruído, mais intenção e uma saída final mais forte.</h2>
+          <p>
+            O domínio raiz precisa terminar com a mesma clareza com que começa:
+            uma leitura curta, uma direção explícita e saídas que convertam sem
+            parecer improvisadas.
+          </p>
+
+          <div className="closing-actions">
+            <a
+              className="primary-link"
+              href="https://datacrash.github.io/professional-hub/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Continuar no Professional Hub
+            </a>
+            <a
+              className="secondary-link"
+              href="https://github.com/DataCrash"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Validar perfil publico
+            </a>
+          </div>
         </div>
-        <p>
-          Este domínio raiz funciona como camada de entrada. O conteúdo profundo
-          permanece concentrado no hub especializado, enquanto este ponto
-          inicial entrega contexto, marca e rotas claras para quem precisa
-          avaliar rápido.
-        </p>
+
+        <div className="closing-panel closing-panel-secondary">
+          <div className="surface-panel-head">
+            <p className="eyebrow">Decision vectors</p>
+            <span className="feed-badge">Final routing</span>
+          </div>
+
+          <div
+            className="decision-list"
+            aria-label="Caminhos finais de avaliacao"
+          >
+            {decisionVectors.map((item) => (
+              <article key={item.index} className="decision-card">
+                <span className="decision-index">{item.index}</span>
+                <div>
+                  <strong>{item.title}</strong>
+                  <p>{item.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
       <footer className="closing-note">
