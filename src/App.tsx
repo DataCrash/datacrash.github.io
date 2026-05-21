@@ -1,7 +1,24 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
-const repositorySignals = [
+type RepositorySignalSeed = {
+  index: string;
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+  repository: string;
+};
+
+type RepositorySignalLive = {
+  stars: number;
+  forks: number;
+  openIssues: number;
+  language: string;
+  updatedAtLabel: string;
+};
+
+const repositorySignals: RepositorySignalSeed[] = [
   {
     index: "01",
     label: "Root domain",
@@ -9,6 +26,7 @@ const repositorySignals = [
     description:
       "Camada de entrada com roteamento rápido, presença visual e prova operacional.",
     href: "https://datacrash.github.io/",
+    repository: "datacrash.github.io",
   },
   {
     index: "02",
@@ -17,6 +35,7 @@ const repositorySignals = [
     description:
       "Dashboard técnico, storytelling profissional, privacidade e CVs em fluxo curto.",
     href: "https://datacrash.github.io/professional-hub/",
+    repository: "professional-hub",
   },
   {
     index: "03",
@@ -25,6 +44,7 @@ const repositorySignals = [
     description:
       "README animado, sinais públicos e identidade complementar ao domínio raiz.",
     href: "https://github.com/DataCrash/datacrash",
+    repository: "datacrash",
   },
 ];
 
@@ -35,8 +55,24 @@ const signalArtifacts = [
   "Snake/README como camada viva do perfil",
 ];
 
+function formatRepositoryDate(value: string) {
+  const parsed = new Date(value);
+
+  if (Number.isNaN(parsed.getTime())) {
+    return "atualizacao indisponivel";
+  }
+
+  return parsed.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "short",
+  });
+}
+
 function App() {
   const shellRef = useRef<HTMLElement | null>(null);
+  const [liveRepositorySignals, setLiveRepositorySignals] = useState<
+    Record<string, RepositorySignalLive>
+  >({});
 
   useEffect(() => {
     const shell = shellRef.current;
@@ -74,6 +110,78 @@ function App() {
     return () => {
       shell.removeEventListener("pointermove", handlePointerMove);
       shell.removeEventListener("pointerleave", resetPointer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadRepositorySignals() {
+      const responses = await Promise.allSettled(
+        repositorySignals.map(async (signal) => {
+          const response = await fetch(
+            `https://api.github.com/repos/DataCrash/${signal.repository}`,
+            {
+              headers: {
+                Accept: "application/vnd.github+json",
+              },
+              signal: controller.signal,
+            },
+          );
+
+          if (!response.ok) {
+            throw new Error(`GitHub API ${response.status}`);
+          }
+
+          const payload = (await response.json()) as {
+            stargazers_count?: number;
+            forks_count?: number;
+            open_issues_count?: number;
+            language?: string | null;
+            updated_at?: string;
+          };
+
+          return {
+            key: signal.repository,
+            value: {
+              stars: payload.stargazers_count ?? 0,
+              forks: payload.forks_count ?? 0,
+              openIssues: payload.open_issues_count ?? 0,
+              language: payload.language ?? "mixed",
+              updatedAtLabel: payload.updated_at
+                ? formatRepositoryDate(payload.updated_at)
+                : "indisponivel",
+            },
+          };
+        }),
+      );
+
+      if (controller.signal.aborted) {
+        return;
+      }
+
+      const nextState = responses.reduce<Record<string, RepositorySignalLive>>(
+        (accumulator, response) => {
+          if (response.status === "fulfilled") {
+            accumulator[response.value.key] = response.value.value;
+          }
+
+          return accumulator;
+        },
+        {},
+      );
+
+      setLiveRepositorySignals(nextState);
+    }
+
+    loadRepositorySignals().catch(() => {
+      if (!controller.signal.aborted) {
+        setLiveRepositorySignals({});
+      }
+    });
+
+    return () => {
+      controller.abort();
     };
   }, []);
 
@@ -311,30 +419,77 @@ function App() {
         <div className="surface-panel">
           <div className="surface-panel-head">
             <p className="eyebrow">Repo Relay</p>
-            <span className="feed-badge">Demo layer</span>
+            <span className="feed-badge">
+              {Object.keys(liveRepositorySignals).length ===
+              repositorySignals.length
+                ? "Live data"
+                : "Fallback mode"}
+            </span>
           </div>
-          <h2>Repositórios com função clara, não apenas presença estática.</h2>
+          <h2>
+            Repositórios com função clara e sinais públicos em tempo de leitura.
+          </h2>
           <p>
-            Esta faixa demonstra uma direção para tornar o root mais vivo: cada
-            superfície entra como parte do sistema, com papel, profundidade e
-            comportamento próprios.
+            Esta faixa deixa de ser apenas conceitual: o root passa a expor
+            metadados públicos do GitHub e mostra como cada superfície participa
+            do ecossistema.
           </p>
 
           <div className="relay-lane">
-            {repositorySignals.map((signal) => (
-              <a
-                key={signal.title}
-                className="relay-card"
-                href={signal.href}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="relay-index">{signal.index}</span>
-                <span className="route-kicker">{signal.label}</span>
-                <strong>{signal.title}</strong>
-                <p>{signal.description}</p>
-              </a>
-            ))}
+            {repositorySignals.map((signal) =>
+              (() => {
+                const liveSignal = liveRepositorySignals[signal.repository];
+
+                return (
+                  <a
+                    key={signal.title}
+                    className="relay-card"
+                    href={signal.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <span className="relay-index">{signal.index}</span>
+                    <span className="route-kicker">{signal.label}</span>
+                    <strong>{signal.title}</strong>
+                    <p>{signal.description}</p>
+
+                    <div
+                      className="relay-meta"
+                      aria-label={`Metadados de ${signal.title}`}
+                    >
+                      <span>
+                        {liveSignal
+                          ? `${liveSignal.stars} stars`
+                          : "surface active"}
+                      </span>
+                      <span>
+                        {liveSignal
+                          ? `${liveSignal.forks} forks`
+                          : "repo linked"}
+                      </span>
+                      <span>
+                        {liveSignal
+                          ? `${liveSignal.language.toLowerCase()} core`
+                          : "public signal"}
+                      </span>
+                    </div>
+
+                    <div className="relay-foot">
+                      <span>
+                        {liveSignal
+                          ? `${liveSignal.openIssues} issues abertas`
+                          : "metadados publicos"}
+                      </span>
+                      <span>
+                        {liveSignal
+                          ? `update ${liveSignal.updatedAtLabel}`
+                          : "fallback visual"}
+                      </span>
+                    </div>
+                  </a>
+                );
+              })(),
+            )}
           </div>
         </div>
 
