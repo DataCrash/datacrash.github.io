@@ -55,6 +55,33 @@ const signalArtifacts = [
   "Snake/README como camada viva do perfil",
 ];
 
+const hiringRoutes = [
+  {
+    index: "01",
+    label: "Mercado BR",
+    title: "Curriculo PT-BR",
+    href: "https://datacrash.github.io/professional-hub/#/cv-ptbr",
+    note: "Leitura curta para recrutamento local e lideranca tecnica.",
+  },
+  {
+    index: "02",
+    label: "Mercado Global",
+    title: "Resume EN",
+    href: "https://datacrash.github.io/professional-hub/#/cv-en",
+    note: "Versao enxuta para avaliacao internacional e remota.",
+  },
+  {
+    index: "03",
+    label: "Validacao publica",
+    title: "LinkedIn",
+    href: "https://www.linkedin.com/in/datacrash/",
+    note: "Contexto de carreira, networking e coerencia publica.",
+  },
+];
+
+const snakePreviewUrl =
+  "https://raw.githubusercontent.com/DataCrash/datacrash/output/github-contribution-grid-snake-dark.svg";
+
 function formatRepositoryDate(value: string) {
   const parsed = new Date(value);
 
@@ -496,22 +523,61 @@ function App() {
         <div className="surface-panel surface-panel-accent">
           <div className="surface-panel-head">
             <p className="eyebrow">CV Signal</p>
-            <span className="feed-badge">Routing assets</span>
+            <span className="feed-badge">Live preview</span>
           </div>
-          <h2>Ativos que sustentam a conversa de contratação.</h2>
+          <h2>Rotas de contratacao com prova viva acoplada ao perfil.</h2>
           <p>
-            Em vez de esconder o valor nos links, a home pode deixar explícito o
-            que cada artefato entrega e como ele conversa com o restante do
-            ecossistema.
+            Em vez de listar ativos soltos, a home passa a organizar as rotas de
+            avaliacao e ainda expor uma camada viva do perfil GitHub para provar
+            manutencao e atividade visual no mesmo ecossistema.
           </p>
 
-          <div className="artifact-list" aria-label="Ativos principais">
-            {signalArtifacts.map((artifact, index) => (
-              <article key={artifact} className="artifact-item">
-                <span className="artifact-bullet">0{index + 1}</span>
-                <p>{artifact}</p>
-              </article>
+          <div
+            className="artifact-rail"
+            aria-label="Rotas principais de contratacao"
+          >
+            {hiringRoutes.map((route) => (
+              <a
+                key={route.title}
+                className="artifact-route"
+                href={route.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="artifact-bullet">{route.index}</span>
+                <div>
+                  <span className="route-kicker">{route.label}</span>
+                  <strong>{route.title}</strong>
+                  <p>{route.note}</p>
+                </div>
+              </a>
             ))}
+          </div>
+
+          <div className="signal-preview" aria-label="Preview do perfil GitHub">
+            <div className="signal-preview-head">
+              <div>
+                <span className="metric-label">Profile Pulse</span>
+                <strong>Snake signal embedded</strong>
+              </div>
+              <span className="feed-badge">Synced from profile repo</span>
+            </div>
+
+            <div className="signal-preview-frame">
+              <img
+                src={snakePreviewUrl}
+                alt="Snake de contribuicoes do perfil DataCrash"
+              />
+            </div>
+
+            <div className="artifact-list" aria-label="Ativos complementares">
+              {signalArtifacts.map((artifact, index) => (
+                <article key={artifact} className="artifact-item">
+                  <span className="artifact-bullet">0{index + 1}</span>
+                  <p>{artifact}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
