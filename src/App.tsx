@@ -645,61 +645,73 @@ function App() {
         </div>
       </section>
 
-      <section className="routes" aria-label="Rotas principais">
-        <a
-          className="route-card route-card-featured"
-          href="https://datacrash.github.io/professional-hub/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span className="route-kicker">Rota principal</span>
-          <h2>Professional Hub</h2>
+      <section className="routes-stage" aria-label="Rotas principais">
+        <div className="routes-intro">
+          <p className="eyebrow">Routing layer</p>
+          <h2>As saídas finais precisam parecer escolhas, não só links.</h2>
           <p>
-            Dashboard, storytelling técnico, privacidade clara e experiência
-            premium.
+            Esta faixa organiza a decisão final de leitura: aprofundar no hub,
+            abrir o currículo certo para o contexto ou validar rapidamente a
+            presença pública complementar.
           </p>
-        </a>
+        </div>
 
-        <a
-          className="route-card"
-          href="https://datacrash.github.io/professional-hub/#/cv-ptbr"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span className="route-kicker">Mercado BR</span>
-          <h2>Currículo PT-BR</h2>
-          <p>
-            Versão orientada a recrutadores, gestão técnica e avaliação de fit
-            local.
-          </p>
-        </a>
+        <div className="routes">
+          <a
+            className="route-card route-card-featured"
+            href="https://datacrash.github.io/professional-hub/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="route-kicker">Rota principal</span>
+            <h2>Professional Hub</h2>
+            <p>
+              Dashboard, storytelling técnico, privacidade clara e experiência
+              premium.
+            </p>
+          </a>
 
-        <a
-          className="route-card"
-          href="https://datacrash.github.io/professional-hub/#/cv-en"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span className="route-kicker">Mercado global</span>
-          <h2>Resume EN</h2>
-          <p>
-            Resumo enxuto para posições internacionais, remotas e de senioridade
-            alta.
-          </p>
-        </a>
+          <a
+            className="route-card"
+            href="https://datacrash.github.io/professional-hub/#/cv-ptbr"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="route-kicker">Mercado BR</span>
+            <h2>Currículo PT-BR</h2>
+            <p>
+              Versão orientada a recrutadores, gestão técnica e avaliação de fit
+              local.
+            </p>
+          </a>
 
-        <a
-          className="route-card"
-          href="https://www.linkedin.com/in/datacrash/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <span className="route-kicker">Rede profissional</span>
-          <h2>LinkedIn</h2>
-          <p>
-            Contexto de carreira, networking e validação pública complementar.
-          </p>
-        </a>
+          <a
+            className="route-card"
+            href="https://datacrash.github.io/professional-hub/#/cv-en"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="route-kicker">Mercado global</span>
+            <h2>Resume EN</h2>
+            <p>
+              Resumo enxuto para posições internacionais, remotas e de senioridade
+              alta.
+            </p>
+          </a>
+
+          <a
+            className="route-card"
+            href="https://www.linkedin.com/in/datacrash/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="route-kicker">Rede profissional</span>
+            <h2>LinkedIn</h2>
+            <p>
+              Contexto de carreira, networking e validação pública complementar.
+            </p>
+          </a>
+        </div>
       </section>
 
       <section className="closing-grid" aria-label="Fechamento da jornada">

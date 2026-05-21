@@ -977,6 +977,45 @@ h3,
   color: var(--accent-cool);
 }
 
+.routes-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.routes-intro {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-content: start;
+  gap: 0.95rem;
+  min-height: 100%;
+  padding: 1.35rem;
+  border: 1px solid rgba(255, 122, 24, 0.14);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 122, 24, 0.12),
+      transparent 34%
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 32%),
+    var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.routes-intro h2 {
+  max-width: 12ch;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.routes-intro p:last-child {
+  max-width: 30rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
 .routes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
@@ -1156,6 +1195,7 @@ h3,
   .surface-grid,
   .manifesto,
   .closing-grid,
+  .routes-stage,
   .routes,
   .proof-strip,
   .hero-metrics {
@@ -1203,6 +1243,7 @@ h3,
   .assembly-map,
   .manifesto,
   .closing-panel,
+  .routes-intro,
   .proof-card,
   .route-card {
     padding-inline: 1.05rem;
@@ -1222,6 +1263,7 @@ h3,
   .signal-cluster,
   .assembly-map,
   .surface-grid,
+  .routes-stage,
   .assembly-lane,
   .relay-lane,
   .proof-strip,
