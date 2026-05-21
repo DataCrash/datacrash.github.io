@@ -147,7 +147,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.9fr);
   gap: 1.5rem;
-  align-items: stretch;
+  align-items: start;
 }
 
 .hero-copy,
@@ -335,9 +335,22 @@
   padding: 1.5rem;
   display: grid;
   gap: 1rem;
+  align-content: start;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent),
     var(--panel);
+}
+
+.signal-summary {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.95rem;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.signal-summary strong {
+  font-size: 1.05rem;
 }
 
 .signal-row {
@@ -357,6 +370,80 @@
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--muted);
+}
+
+.signal-cluster {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.signal-cluster article {
+  display: grid;
+  gap: 0.45rem;
+  min-height: 5.6rem;
+  padding: 0.8rem;
+  border: 1px solid var(--border-soft);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.signal-feed {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+  border: 1px solid rgba(79, 225, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(79, 225, 255, 0.05), transparent 36%),
+    rgba(255, 255, 255, 0.02);
+}
+
+.signal-feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.feed-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(255, 122, 24, 0.24);
+  background: rgba(255, 122, 24, 0.08);
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.feed-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.feed-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  font-family: var(--mono);
+  color: var(--accent-cool);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.feed-item strong {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.feed-item p {
+  color: var(--text);
 }
 
 .assembly-map {
@@ -560,7 +647,8 @@
   .manifesto,
   .routes,
   .proof-strip,
-  .hero-metrics {
+  .hero-metrics,
+  .signal-cluster {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -593,6 +681,7 @@
   }
 
   .hero-metrics,
+  .signal-cluster,
   .assembly-map,
   .assembly-lane,
   .proof-strip,

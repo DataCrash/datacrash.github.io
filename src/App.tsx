@@ -131,6 +131,16 @@ function App() {
 
         <aside className="signal-panel" aria-label="Resumo profissional">
           <p className="panel-label">Signal Board</p>
+          <div className="signal-summary">
+            <div>
+              <span className="metric-label">Estado</span>
+              <strong>Presença ativa e roteada</strong>
+            </div>
+            <p>
+              Hub, perfil, CVs e domínio raiz funcionando como um mesmo sistema.
+            </p>
+          </div>
+
           <div className="signal-row">
             <span>Nome</span>
             <strong>Alessandro Ferreira Pereira</strong>
@@ -146,6 +156,52 @@ function App() {
           <div className="signal-row">
             <span>Destino</span>
             <strong>Hub, CV PT-BR, CV EN, GitHub</strong>
+          </div>
+
+          <div className="signal-cluster" aria-label="Sinais operacionais">
+            <article>
+              <span className="metric-label">Repositórios</span>
+              <strong>3 superfícies conectadas</strong>
+            </article>
+            <article>
+              <span className="metric-label">CVs</span>
+              <strong>PT-BR + EN prontos</strong>
+            </article>
+            <article>
+              <span className="metric-label">Perfil</span>
+              <strong>README vivo + snake</strong>
+            </article>
+          </div>
+
+          <div className="signal-feed" aria-label="Fluxo de sinal">
+            <div className="signal-feed-header">
+              <span className="metric-label">Pulse Feed</span>
+              <span className="feed-badge">Live routing</span>
+            </div>
+
+            <article className="feed-item">
+              <span className="feed-index">01</span>
+              <div>
+                <strong>Root gateway</strong>
+                <p>Primeira leitura visual, prova operacional e rotas curtas.</p>
+              </div>
+            </article>
+
+            <article className="feed-item">
+              <span className="feed-index">02</span>
+              <div>
+                <strong>Professional hub</strong>
+                <p>Dashboard técnico, narrativa profissional e privacidade clara.</p>
+              </div>
+            </article>
+
+            <article className="feed-item">
+              <span className="feed-index">03</span>
+              <div>
+                <strong>CV + GitHub profile</strong>
+                <p>Currículos, validação pública e ativos de confiança técnica.</p>
+              </div>
+            </article>
           </div>
         </aside>
       </section>
