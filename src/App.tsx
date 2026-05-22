@@ -66,13 +66,28 @@ function readStoredGameProgress(): StoredGameProgress {
 
     const parsed = JSON.parse(raw) as Partial<StoredGameProgress>;
 
+    const parsedRound =
+      typeof parsed.round === "number" && Number.isFinite(parsed.round)
+        ? parsed.round
+        : 0;
+    const parsedScore =
+      typeof parsed.score === "number" && Number.isFinite(parsed.score)
+        ? parsed.score
+        : 0;
+    const parsedStreak =
+      typeof parsed.streak === "number" && Number.isFinite(parsed.streak)
+        ? parsed.streak
+        : 0;
+    const parsedBestStreak =
+      typeof parsed.bestStreak === "number" && Number.isFinite(parsed.bestStreak)
+        ? parsed.bestStreak
+        : 0;
+
     return {
-      round: Number.isFinite(parsed.round) ? Math.max(0, parsed.round) : 0,
-      score: Number.isFinite(parsed.score) ? Math.max(0, parsed.score) : 0,
-      streak: Number.isFinite(parsed.streak) ? Math.max(0, parsed.streak) : 0,
-      bestStreak: Number.isFinite(parsed.bestStreak)
-        ? Math.max(0, parsed.bestStreak)
-        : 0,
+      round: Math.max(0, parsedRound),
+      score: Math.max(0, parsedScore),
+      streak: Math.max(0, parsedStreak),
+      bestStreak: Math.max(0, parsedBestStreak),
     };
   } catch {
     return defaultGameProgress;
