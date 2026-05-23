@@ -1,6 +1,7 @@
 import "./App.css";
 
 import { HighlightCards } from "./presentation/components/HighlightCards";
+import { RepositoryDashboards } from "./presentation/components/RepositoryDashboards";
 import { RouteLinks } from "./presentation/components/RouteLinks";
 import { SectionBlock } from "./presentation/components/SectionBlock";
 import { SkillMatrix } from "./presentation/components/SkillMatrix";
@@ -11,9 +12,16 @@ function App() {
 
   return (
     <main className="app-shell">
+      <div className="living-atmosphere" aria-hidden="true">
+        <span className="orb orb-a" />
+        <span className="orb orb-b" />
+        <span className="orb orb-c" />
+      </div>
+
       <nav className="top-nav" aria-label="Navegação da página">
         <a href="#sobre">Sobre</a>
         <a href="#carreira">Carreira</a>
+        <a href="#dashboards">Dashboards</a>
         <a href="#hard-skills">Hard Skills</a>
         <a href="#soft-skills">Soft Skills</a>
         <a href="#escotismo">Escotismo</a>
@@ -50,6 +58,15 @@ function App() {
             </article>
           ))}
         </div>
+      </SectionBlock>
+
+      <SectionBlock
+        id="dashboards"
+        kicker="Organismo vivo"
+        title="Dashboards dinâmicos dos repositórios"
+        description="Métricas em tempo real para acompanhar pulso técnico, atividade e tração de cada superfície do ecossistema."
+      >
+        <RepositoryDashboards repositories={viewModel.repositoryDashboards} />
       </SectionBlock>
 
       <SectionBlock

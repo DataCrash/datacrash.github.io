@@ -38,6 +38,7 @@ export class LandingPageBuilder implements LandingPageUseCase {
         workplaceBenefits: profile.volunteering.workplaceBenefits,
       },
       routes: profile.routes,
+      repositoryDashboards: profile.repositoryDashboards,
     };
   }
 }

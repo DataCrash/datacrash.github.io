@@ -138,6 +138,32 @@ export class StaticProfileDataSource implements ProfileDataSource {
           href: "https://raw.githubusercontent.com/DataCrash/professional-hub/main/public/cv/Senior_DotNet_Engineer_Alessandro_Pereira_EN.pdf",
         },
       ],
+      repositoryDashboards: [
+        {
+          owner: "DataCrash",
+          name: "datacrash.github.io",
+          label: "Root Gateway",
+          description:
+            "Entrada principal da presença profissional com foco em narrativa e conversão.",
+          href: "https://github.com/DataCrash/datacrash.github.io",
+        },
+        {
+          owner: "DataCrash",
+          name: "professional-hub",
+          label: "Professional Hub",
+          description:
+            "Camada premium com dashboard profissional, CVs e fluxo de avaliação.",
+          href: "https://github.com/DataCrash/professional-hub",
+        },
+        {
+          owner: "DataCrash",
+          name: "datacrash",
+          label: "GitHub Profile",
+          description:
+            "Repositório de sinais públicos com README animado e identidade técnica.",
+          href: "https://github.com/DataCrash/datacrash",
+        },
+      ],
     };
   }
 }

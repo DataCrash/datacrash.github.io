@@ -34,6 +34,22 @@ export interface ExternalRoute {
   isPrimary?: boolean;
 }
 
+export interface RepositoryDashboardConfig {
+  owner: string;
+  name: string;
+  label: string;
+  description: string;
+  href: string;
+}
+
+export interface RepositoryMetricsSnapshot {
+  stars: number;
+  forks: number;
+  openIssues: number;
+  watchers: number;
+  lastUpdatedAt: string;
+}
+
 export interface ProfessionalProfile {
   fullName: string;
   headline: string;
@@ -45,4 +61,5 @@ export interface ProfessionalProfile {
   experiences: WorkExperience[];
   volunteering: VolunteeringExperience;
   routes: ExternalRoute[];
+  repositoryDashboards: RepositoryDashboardConfig[];
 }

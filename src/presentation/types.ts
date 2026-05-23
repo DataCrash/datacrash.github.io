@@ -1,4 +1,9 @@
-import type { ExternalRoute, Skill, WorkExperience } from "../domain/models";
+import type {
+  ExternalRoute,
+  RepositoryDashboardConfig,
+  Skill,
+  WorkExperience,
+} from "../domain/models";
 
 export interface LandingViewModel {
   hero: {
@@ -23,4 +28,5 @@ export interface LandingViewModel {
     workplaceBenefits: string[];
   };
   routes: ExternalRoute[];
+  repositoryDashboards: RepositoryDashboardConfig[];
 }

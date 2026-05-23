@@ -1,7 +1,50 @@
 .app-shell {
+  position: relative;
+  overflow: hidden;
   width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 1.2rem 0 3rem;
+}
+
+.living-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(40px);
+  opacity: 0.45;
+  animation: float-orb 14s ease-in-out infinite;
+}
+
+.orb-a {
+  top: 2rem;
+  left: -3rem;
+  width: 11rem;
+  height: 11rem;
+  background: rgba(89, 212, 255, 0.25);
+}
+
+.orb-b {
+  top: 8rem;
+  right: -4rem;
+  width: 13rem;
+  height: 13rem;
+  background: rgba(255, 159, 91, 0.26);
+  animation-delay: 1.2s;
+}
+
+.orb-c {
+  bottom: 20%;
+  left: 35%;
+  width: 8rem;
+  height: 8rem;
+  background: rgba(136, 248, 255, 0.2);
+  animation-delay: 2.2s;
 }
 
 .top-nav {
@@ -17,6 +60,14 @@
   background: color-mix(in srgb, var(--panel-strong) 88%, transparent);
   backdrop-filter: blur(10px);
   margin-bottom: 1.2rem;
+}
+
+.top-nav,
+.hero,
+.section-block,
+.footer-note {
+  position: relative;
+  z-index: 1;
 }
 
 .top-nav a {
@@ -116,6 +167,19 @@
   border-radius: var(--radius-xl);
   background: var(--panel);
   padding: 1.4rem;
+  animation: rise-in 480ms ease both;
+}
+
+.section-block:nth-of-type(2) {
+  animation-delay: 40ms;
+}
+
+.section-block:nth-of-type(3) {
+  animation-delay: 80ms;
+}
+
+.section-block:nth-of-type(4) {
+  animation-delay: 120ms;
 }
 
 .section-header h2 {
@@ -242,6 +306,117 @@
     color-mix(in srgb, var(--panel-strong) 94%, transparent);
 }
 
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.dashboard-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(170deg, rgba(89, 212, 255, 0.08), transparent 42%),
+    color-mix(in srgb, var(--panel-strong) 93%, transparent);
+  padding: 1rem;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: var(--border-strong);
+}
+
+.dashboard-card.status-loading {
+  animation: pulse-card 1.5s ease-in-out infinite;
+}
+
+.dashboard-card.status-error {
+  border-color: rgba(255, 127, 127, 0.5);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.dashboard-header h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1rem;
+}
+
+.dashboard-badge {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.26rem 0.54rem;
+  font-size: 0.72rem;
+  color: var(--cool);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dashboard-description {
+  margin: 0.55rem 0 0;
+  color: #d5e1ed;
+  line-height: 1.5;
+}
+
+.dashboard-metrics {
+  margin-top: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.dashboard-metrics > div {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.6rem;
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+}
+
+.dashboard-metrics strong {
+  display: block;
+  font-size: 1.1rem;
+  font-family: var(--display);
+}
+
+.dashboard-metrics span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.dashboard-footer {
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dashboard-footer small {
+  color: var(--muted);
+}
+
+.dashboard-footer a {
+  text-decoration: none;
+  color: var(--cool);
+  font-size: 0.82rem;
+}
+
+.dashboard-loading {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
 .footer-note {
   margin-top: 1.2rem;
   padding: 1rem 1.2rem;
@@ -250,6 +425,40 @@
   color: var(--muted);
   line-height: 1.6;
   text-align: center;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-orb {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-12px) translateX(10px) scale(1.08);
+  }
+}
+
+@keyframes pulse-card {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(89, 212, 255, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 0 1px rgba(89, 212, 255, 0.35);
+  }
 }
 
 @media (max-width: 800px) {
