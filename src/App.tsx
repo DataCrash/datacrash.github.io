@@ -79,7 +79,8 @@ function readStoredGameProgress(): StoredGameProgress {
         ? parsed.streak
         : 0;
     const parsedBestStreak =
-      typeof parsed.bestStreak === "number" && Number.isFinite(parsed.bestStreak)
+      typeof parsed.bestStreak === "number" &&
+      Number.isFinite(parsed.bestStreak)
         ? parsed.bestStreak
         : 0;
 
