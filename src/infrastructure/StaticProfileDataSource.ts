@@ -6,18 +6,18 @@ export class StaticProfileDataSource implements ProfileDataSource {
     return {
       fullName: "Alessandro Ferreira Pereira",
       headline:
-        "Senior .NET Engineer | Arquitetura de Solucoes | Modernizacao de Plataformas",
-      location: "Sao Paulo, Brasil",
+        "Senior .NET Engineer | Arquitetura de Soluções | Modernização de Plataformas",
+      location: "São Paulo, Brasil",
       lifeAndCareerSummary:
-        "Minha carreira foi construida em ambientes enterprise de alta criticidade, conectando arquitetura, execucao tecnica e qualidade de entrega para gerar previsibilidade de negocio.",
+        "Minha carreira foi construída em ambientes enterprise de alta criticidade, conectando arquitetura, execução técnica e qualidade de entrega para gerar previsibilidade de negócio.",
       story: {
-        title: "Quem sou eu na pratica",
+        title: "Quem sou eu na prática",
         summary:
-          "Atuo com foco em confiabilidade, modernizacao de plataformas e evolucao continua de produtos digitais. Minha abordagem combina lideranca tecnica, pragmatismo e comunicacao clara entre times tecnicos e stakeholders.",
+          "Atuo com foco em confiabilidade, modernização de plataformas e evolução contínua de produtos digitais. Minha abordagem combina liderança técnica, pragmatismo e comunicação clara entre times técnicos e stakeholders.",
         highlights: [
           "+15 anos em engenharia de software com foco backend",
-          "Experiencia em modernizacao de legados e desenho de APIs",
-          "Atuacao orientada a impacto de negocio e estabilidade operacional",
+          "Experiência em modernização de legados e desenho de APIs",
+          "Atuação orientada a impacto de negócio e estabilidade operacional",
         ],
       },
       experiences: [
@@ -26,115 +26,115 @@ export class StaticProfileDataSource implements ProfileDataSource {
           role: "Senior .NET Engineer",
           period: "Atual",
           outcome:
-            "Conduzo evolucao tecnica de sistemas criticos com foco em escalabilidade, qualidade e governanca de codigo.",
+            "Conduzo evolução técnica de sistemas críticos com foco em escalabilidade, qualidade e governança de código.",
         },
         {
           company: "Projetos enterprise em diversos contextos",
-          role: "Engenharia e Arquitetura de Solucoes",
+          role: "Engenharia e Arquitetura de Soluções",
           period: "Carreira",
           outcome:
-            "Entregas consistentes em cenarios de integracao complexa, reduzindo risco operacional e acelerando ciclos de entrega.",
+            "Entregas consistentes em cenários de integração complexa, reduzindo risco operacional e acelerando ciclos de entrega.",
         },
       ],
       hardSkills: [
         {
           name: ".NET e C#",
           context:
-            "Arquitetura, APIs e manutencao de plataformas de missao critica",
+            "Arquitetura, APIs e manutenção de plataformas de missão crítica",
           level: "Especialista",
         },
         {
-          name: "Arquitetura de Solucoes",
-          context: "Definicao de estrutura tecnica com foco em evolucao segura",
+          name: "Arquitetura de Soluções",
+          context: "Definição de estrutura técnica com foco em evolução segura",
           level: "Especialista",
         },
         {
           name: "Azure e Cloud",
-          context: "Servicos gerenciados, observabilidade e operacao em nuvem",
-          level: "Avancado",
+          context: "Serviços gerenciados, observabilidade e operação em nuvem",
+          level: "Avançado",
         },
         {
-          name: "Containers e Orquestracao",
-          context: "Docker e Kubernetes para padronizacao de entrega",
-          level: "Avancado",
+          name: "Containers e Orquestração",
+          context: "Docker e Kubernetes para padronização de entrega",
+          level: "Avançado",
         },
         {
           name: "Qualidade de Software",
-          context: "Testes, revisao tecnica e praticas de engenharia",
-          level: "Avancado",
+          context: "Testes, revisão técnica e práticas de engenharia",
+          level: "Avançado",
         },
         {
           name: "React e TypeScript",
-          context: "Interfaces estrategicas para produtos e hubs profissionais",
-          level: "Intermediario",
+          context: "Interfaces estratégicas para produtos e hubs profissionais",
+          level: "Intermediário",
         },
       ],
       softSkills: [
         {
-          name: "Comunicacao objetiva",
-          context: "Traducao de temas tecnicos para decisao de negocio",
+          name: "Comunicação objetiva",
+          context: "Tradução de temas técnicos para decisão de negócio",
           level: "Especialista",
         },
         {
-          name: "Lideranca colaborativa",
+          name: "Liderança colaborativa",
           context:
-            "Formacao de consenso tecnico entre times multidisciplinares",
-          level: "Avancado",
+            "Formação de consenso técnico entre times multidisciplinares",
+          level: "Avançado",
         },
         {
-          name: "Pensamento sistemico",
-          context: "Leitura de impacto ponta a ponta em arquitetura e operacao",
-          level: "Avancado",
+          name: "Pensamento sistêmico",
+          context: "Leitura de impacto ponta a ponta em arquitetura e operação",
+          level: "Avançado",
         },
         {
-          name: "Gestao de prioridades",
+          name: "Gestão de prioridades",
           context: "Foco no que gera valor com menor risco",
-          level: "Avancado",
+          level: "Avançado",
         },
       ],
       volunteering: {
         role: "Chefe Escoteiro",
         organization: "Movimento Escoteiro",
         summary:
-          "No voluntariado escoteiro, lidero jovens e equipes em atividades que exigem planejamento, responsabilidade, disciplina e tomada de decisao em campo.",
+          "No voluntariado escoteiro, lidero jovens e equipes em atividades que exigem planejamento, responsabilidade, disciplina e tomada de decisão em campo.",
         qualitiesApplied: [
-          "Lideranca servidora e exemplo pratico",
-          "Gestao de conflitos com empatia e firmeza",
-          "Planejamento de atividades com seguranca e previsao de risco",
-          "Comunicacao clara com perfis e idades diferentes",
+          "Liderança servidora e exemplo prático",
+          "Gestão de conflitos com empatia e firmeza",
+          "Planejamento de atividades com segurança e previsão de risco",
+          "Comunicação clara com perfis e idades diferentes",
         ],
         workplaceBenefits: [
-          "Maior capacidade de coordenar times sob pressao",
-          "Decisoes mais rapidas em cenarios de incerteza",
-          "Fortalecimento de cultura de confianca e responsabilidade",
+          "Maior capacidade de coordenar times sob pressão",
+          "Decisões mais rápidas em cenários de incerteza",
+          "Fortalecimento de cultura de confiança e responsabilidade",
           "Melhor escuta ativa e desenvolvimento de pessoas",
         ],
       },
       routes: [
         {
           label: "Professional Hub",
-          description: "Narrativa completa, dashboard tecnico e CVs",
+          description: "Narrativa completa, dashboard técnico e CVs",
           href: "https://datacrash.github.io/professional-hub/",
           isPrimary: true,
         },
         {
           label: "GitHub",
-          description: "Projetos publicos e sinais tecnicos",
+          description: "Projetos públicos e sinais técnicos",
           href: "https://github.com/DataCrash",
         },
         {
           label: "LinkedIn",
-          description: "Trajetoria profissional e networking",
+          description: "Trajetória profissional e networking",
           href: "https://www.linkedin.com/in/datacrash/",
         },
         {
           label: "CV PT-BR (PDF)",
-          description: "Versao para triagem local",
+          description: "Versão para triagem local",
           href: "https://raw.githubusercontent.com/DataCrash/professional-hub/main/public/cv/Senior_DotNet_Engineer_Alessandro_Pereira_BR.pdf",
         },
         {
           label: "Resume EN (PDF)",
-          description: "Versao para avaliacao internacional",
+          description: "Versão para avaliação internacional",
           href: "https://raw.githubusercontent.com/DataCrash/professional-hub/main/public/cv/Senior_DotNet_Engineer_Alessandro_Pereira_EN.pdf",
         },
       ],

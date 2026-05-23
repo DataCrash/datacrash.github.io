@@ -11,7 +11,7 @@ function App() {
 
   return (
     <main className="app-shell">
-      <nav className="top-nav" aria-label="Navegacao da pagina">
+      <nav className="top-nav" aria-label="Navegação da página">
         <a href="#sobre">Sobre</a>
         <a href="#carreira">Carreira</a>
         <a href="#hard-skills">Hard Skills</a>
@@ -36,7 +36,10 @@ function App() {
       >
         <HighlightCards items={viewModel.story.highlights} />
 
-        <div className="experience-grid" aria-label="Experiencias profissionais">
+        <div
+          className="experience-grid"
+          aria-label="Experiências profissionais"
+        >
           {viewModel.experiences.map((experience) => (
             <article key={experience.company} className="experience-card">
               <h3>{experience.role}</h3>
@@ -51,18 +54,18 @@ function App() {
 
       <SectionBlock
         id="hard-skills"
-        kicker="Competencias tecnicas"
+        kicker="Competências técnicas"
         title="Hard Skills"
-        description="Tecnologias e capacidades tecnicas aplicadas no dia a dia para entregar estabilidade, escala e evolucao segura."
+        description="Tecnologias e capacidades técnicas aplicadas no dia a dia para entregar estabilidade, escala e evolução segura."
       >
         <SkillMatrix skills={viewModel.hardSkills} />
       </SectionBlock>
 
       <SectionBlock
         id="soft-skills"
-        kicker="Competencias comportamentais"
+        kicker="Competências comportamentais"
         title="Soft Skills"
-        description="Habilidades interpessoais que sustentam lideranca tecnica, alinhamento de time e entrega consistente."
+        description="Habilidades interpessoais que sustentam liderança técnica, alinhamento de time e entrega consistente."
       >
         <SkillMatrix skills={viewModel.softSkills} />
       </SectionBlock>
@@ -75,7 +78,7 @@ function App() {
       >
         <div className="volunteer-grid">
           <article className="volunteer-card">
-            <h3>Qualidades reforcadas no escotismo</h3>
+            <h3>Qualidades reforçadas no escotismo</h3>
             <ul className="volunteer-list">
               {viewModel.volunteering.qualitiesApplied.map((quality) => (
                 <li key={quality}>{quality}</li>
@@ -84,7 +87,7 @@ function App() {
           </article>
 
           <article className="volunteer-card">
-            <h3>Beneficios diretos no ambiente de trabalho</h3>
+            <h3>Benefícios diretos no ambiente de trabalho</h3>
             <ul className="volunteer-list">
               {viewModel.volunteering.workplaceBenefits.map((benefit) => (
                 <li key={benefit}>{benefit}</li>
@@ -96,15 +99,16 @@ function App() {
 
       <SectionBlock
         id="rotas"
-        kicker="Proximos passos"
-        title="Rotas objetivas para avaliacao profissional"
-        description="A pagina raiz apresenta quem sou e direciona para as superficies de aprofundamento sem redundancia."
+        kicker="Próximos passos"
+        title="Rotas objetivas para avaliação profissional"
+        description="A página raiz apresenta quem sou e direciona para as superfícies de aprofundamento sem redundância."
       >
         <RouteLinks routes={viewModel.routes} />
       </SectionBlock>
 
       <footer className="footer-note">
-        Esta SPA foi redesenhada para manter o escopo original do root gateway, com UX alinhada ao ecossistema DataCrash Profile e Professional Hub.
+        Esta SPA foi redesenhada para manter o escopo original do root gateway,
+        com UX alinhada ao ecossistema DataCrash Profile e Professional Hub.
       </footer>
     </main>
   );
