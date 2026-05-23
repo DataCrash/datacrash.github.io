@@ -1,0 +1,265 @@
+.app-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.2rem 0 3rem;
+}
+
+.top-nav {
+  position: sticky;
+  top: 0.8rem;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel-strong) 88%, transparent);
+  backdrop-filter: blur(10px);
+  margin-bottom: 1.2rem;
+}
+
+.top-nav a {
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.5rem 0.8rem;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.top-nav a:hover {
+  border-color: var(--border);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(
+      circle at 92% 12%,
+      rgba(89, 212, 255, 0.2),
+      transparent 36%
+    ),
+    linear-gradient(140deg, rgba(255, 159, 91, 0.14), transparent 42%),
+    var(--panel);
+  box-shadow: var(--shadow);
+  padding: 2.1rem;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.22;
+}
+
+.hero > * {
+  position: relative;
+}
+
+.hero-kicker {
+  margin: 0;
+  color: var(--cool);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+}
+
+.hero h1 {
+  margin: 0.6rem 0 0;
+  font-family: var(--display);
+  letter-spacing: -0.03em;
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  line-height: 0.96;
+  max-width: 16ch;
+}
+
+.hero h2 {
+  margin: 0.6rem 0 0;
+  font-size: clamp(1rem, 2.2vw, 1.32rem);
+  font-weight: 600;
+  color: #dbe8f5;
+  max-width: 45ch;
+}
+
+.hero-meta {
+  margin-top: 0.8rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.hero-summary {
+  margin-top: 1rem;
+  max-width: 60ch;
+  line-height: 1.7;
+}
+
+.section-block {
+  margin-top: 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--panel);
+  padding: 1.4rem;
+}
+
+.section-header h2 {
+  margin: 0.45rem 0 0;
+  font-family: var(--display);
+  letter-spacing: -0.02em;
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+}
+
+.section-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.72rem;
+  color: var(--warm);
+}
+
+.section-description {
+  margin: 0.6rem 0 0;
+  color: var(--muted);
+  max-width: 70ch;
+  line-height: 1.6;
+}
+
+.highlight-grid,
+.experience-grid,
+.skill-matrix,
+.route-grid,
+.volunteer-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.highlight-grid,
+.experience-grid,
+.route-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.highlight-card,
+.experience-card,
+.route-card,
+.skill-card,
+.volunteer-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--panel-strong) 92%, transparent);
+  padding: 1rem;
+}
+
+.experience-card h3,
+.route-card span,
+.skill-card h3,
+.volunteer-card h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.02rem;
+}
+
+.experience-card p,
+.skill-card p,
+.route-card p,
+.volunteer-card p,
+.highlight-card p {
+  margin: 0.55rem 0 0;
+  line-height: 1.55;
+  color: #d4e1ee;
+}
+
+.experience-meta {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.skill-matrix {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.skill-level {
+  display: inline-block;
+  margin-top: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--cool);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.volunteer-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.volunteer-list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  color: #d4e1ee;
+  line-height: 1.52;
+}
+
+.volunteer-list li + li {
+  margin-top: 0.45rem;
+}
+
+.route-card {
+  text-decoration: none;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.route-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.route-card.is-primary {
+  border-color: color-mix(in srgb, var(--cool) 56%, var(--border));
+  background:
+    linear-gradient(145deg, rgba(89, 212, 255, 0.16), transparent 48%),
+    color-mix(in srgb, var(--panel-strong) 94%, transparent);
+}
+
+.footer-note {
+  margin-top: 1.2rem;
+  padding: 1rem 1.2rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--muted);
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .app-shell {
+    width: min(1180px, calc(100% - 1rem));
+    padding-top: 0.8rem;
+  }
+
+  .hero,
+  .section-block {
+    padding: 1.1rem;
+  }
+}

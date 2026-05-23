@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap");
+
+:root {
+  --bg: #0a1118;
+  --bg-soft: #0f1b26;
+  --panel: rgba(17, 30, 43, 0.82);
+  --panel-strong: rgba(20, 36, 51, 0.92);
+  --text: #e9eef5;
+  --muted: #9ab0c7;
+  --border: rgba(101, 146, 183, 0.34);
+  --border-strong: rgba(122, 197, 255, 0.6);
+  --cool: #59d4ff;
+  --warm: #ff9f5b;
+  --shadow: 0 24px 70px rgba(4, 10, 16, 0.5);
+  --radius-xl: 1.4rem;
+  --radius-lg: 1rem;
+  --sans: "Archivo", "Segoe UI Variable Text", sans-serif;
+  --display: "Space Grotesk", "Segoe UI Variable Text", sans-serif;
+
+  font-family: var(--sans);
+  color: var(--text);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
