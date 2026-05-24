@@ -1,0 +1,48 @@
+name: Repository Metrics Refresh
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: datacrash-root-repository-metrics
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Refresh metrics data
+        run: npm run data:refresh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_DATA_TOKEN }}
+          GH_PUBLIC_DATA_TOKEN: ${{ github.token }}
+
+      - name: Commit and push when changed
+        run: |
+          if git diff --quiet -- public/data/repository-metrics.json; then
+            echo "Sem mudanças em métricas"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/repository-metrics.json
+          git commit -m "chore(data): refresh repository metrics"
+          git push

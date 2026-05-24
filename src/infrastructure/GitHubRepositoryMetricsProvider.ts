@@ -12,8 +12,70 @@ type GitHubRepositoryResponse = {
   pushed_at: string;
 };
 
+type RepositoryMetricsSnapshotFile = {
+  generatedAt: string;
+  repositories: Array<
+    RepositoryMetricsSnapshot & {
+      owner: string;
+      name: string;
+    }
+  >;
+};
+
 export class GitHubRepositoryMetricsProvider implements RepositoryMetricsProvider {
-  async getRepositoryMetrics(
+  private static snapshotPromise: Promise<
+    Map<string, RepositoryMetricsSnapshot>
+  > | null = null;
+
+  private static readonly snapshotPath = `${import.meta.env.BASE_URL}data/repository-metrics.json`;
+
+  private static toKey(owner: string, name: string): string {
+    return `${owner}/${name}`.toLowerCase();
+  }
+
+  private async getSnapshotMap(): Promise<
+    Map<string, RepositoryMetricsSnapshot>
+  > {
+    if (!GitHubRepositoryMetricsProvider.snapshotPromise) {
+      GitHubRepositoryMetricsProvider.snapshotPromise = fetch(
+        GitHubRepositoryMetricsProvider.snapshotPath,
+        {
+          cache: "no-store",
+        },
+      )
+        .then(async (response) => {
+          if (!response.ok) {
+            return new Map<string, RepositoryMetricsSnapshot>();
+          }
+
+          const payload =
+            (await response.json()) as RepositoryMetricsSnapshotFile;
+
+          return payload.repositories.reduce((accumulator, repository) => {
+            accumulator.set(
+              GitHubRepositoryMetricsProvider.toKey(
+                repository.owner,
+                repository.name,
+              ),
+              {
+                stars: repository.stars,
+                forks: repository.forks,
+                openIssues: repository.openIssues,
+                watchers: repository.watchers,
+                lastUpdatedAt: repository.lastUpdatedAt,
+              },
+            );
+
+            return accumulator;
+          }, new Map<string, RepositoryMetricsSnapshot>());
+        })
+        .catch(() => new Map<string, RepositoryMetricsSnapshot>());
+    }
+
+    return GitHubRepositoryMetricsProvider.snapshotPromise;
+  }
+
+  private async getFromApi(
     repository: RepositoryDashboardConfig,
   ): Promise<RepositoryMetricsSnapshot> {
     const endpoint = `https://api.github.com/repos/${repository.owner}/${repository.name}`;
@@ -36,5 +98,22 @@ export class GitHubRepositoryMetricsProvider implements RepositoryMetricsProvide
       watchers: payload.subscribers_count,
       lastUpdatedAt: payload.pushed_at,
     };
+  }
+
+  async getRepositoryMetrics(
+    repository: RepositoryDashboardConfig,
+  ): Promise<RepositoryMetricsSnapshot> {
+    const key = GitHubRepositoryMetricsProvider.toKey(
+      repository.owner,
+      repository.name,
+    );
+    const snapshotMap = await this.getSnapshotMap();
+    const snapshot = snapshotMap.get(key);
+
+    if (snapshot) {
+      return snapshot;
+    }
+
+    return this.getFromApi(repository);
   }
 }
