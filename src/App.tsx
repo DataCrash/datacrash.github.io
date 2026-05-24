@@ -1,5 +1,12 @@
 import "./App.css";
 
+import {
+  useEffect,
+  useEffectEvent,
+  useRef,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
+
 import { HighlightCards } from "./presentation/components/HighlightCards";
 import { RepositoryDashboards } from "./presentation/components/RepositoryDashboards";
 import { RouteLinks } from "./presentation/components/RouteLinks";
@@ -7,15 +14,209 @@ import { SectionBlock } from "./presentation/components/SectionBlock";
 import { SkillMatrix } from "./presentation/components/SkillMatrix";
 import { useLandingViewModel } from "./presentation/hooks/useLandingViewModel";
 
+const windReactiveSelector =
+  ".top-nav, .hero, .section-block, .dashboard-card, .footer-note";
+const windOrbSelector = ".orb";
+
+function useWindMotion() {
+  const shellRef = useRef<HTMLElement | null>(null);
+  const reactiveAnimationsRef = useRef(new Map<HTMLElement, Animation>());
+  const orbAnimationsRef = useRef(new Map<HTMLElement, Animation>());
+  const settleTimeoutRef = useRef<number | null>(null);
+  const lastTriggerRef = useRef(0);
+  const reducedMotionRef = useRef(false);
+
+  useEffect(() => {
+    const mediaQuery = globalThis.matchMedia?.(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    if (!mediaQuery) {
+      return () => undefined;
+    }
+
+    const syncPreference = () => {
+      reducedMotionRef.current = mediaQuery.matches;
+    };
+
+    syncPreference();
+    mediaQuery.addEventListener?.("change", syncPreference);
+
+    return () => {
+      mediaQuery.removeEventListener?.("change", syncPreference);
+
+      if (settleTimeoutRef.current !== null) {
+        globalThis.clearTimeout(settleTimeoutRef.current);
+      }
+
+      reactiveAnimationsRef.current.forEach((animation) => animation.cancel());
+      orbAnimationsRef.current.forEach((animation) => animation.cancel());
+    };
+  }, []);
+
+  const settleWind = useEffectEvent(() => {
+    const shell = shellRef.current;
+
+    if (!shell) {
+      return;
+    }
+
+    shell.style.setProperty("--wind-x", "0px");
+    shell.style.setProperty("--wind-y", "0px");
+    shell.style.setProperty("--wind-tilt", "0deg");
+    shell.style.setProperty("--wind-energy", "0");
+  });
+
+  const animateWind = useEffectEvent(
+    (
+      clientX: number,
+      clientY: number,
+      movementX: number,
+      movementY: number,
+    ) => {
+      const shell = shellRef.current;
+
+      if (!shell || reducedMotionRef.current) {
+        return;
+      }
+
+      const now = globalThis.performance.now();
+
+      if (now - lastTriggerRef.current < 110) {
+        return;
+      }
+
+      lastTriggerRef.current = now;
+
+      const rect = shell.getBoundingClientRect();
+      const normalizedX = (clientX - rect.left) / rect.width - 0.5;
+      const normalizedY = (clientY - rect.top) / rect.height - 0.5;
+      const kineticEnergy = Math.min(
+        1,
+        Math.hypot(normalizedX, normalizedY) * 1.7 +
+          (Math.abs(movementX) + Math.abs(movementY)) / 28,
+      );
+      const windX = normalizedX * (18 + kineticEnergy * 10);
+      const windY = normalizedY * (10 + kineticEnergy * 6);
+      const windTilt = normalizedX * (3 + kineticEnergy * 2.5);
+
+      shell.style.setProperty("--wind-x", `${windX.toFixed(2)}px`);
+      shell.style.setProperty("--wind-y", `${windY.toFixed(2)}px`);
+      shell.style.setProperty("--wind-tilt", `${windTilt.toFixed(2)}deg`);
+      shell.style.setProperty("--wind-energy", kineticEnergy.toFixed(3));
+
+      const reactiveElements =
+        shell.querySelectorAll<HTMLElement>(windReactiveSelector);
+
+      reactiveElements.forEach((element, index) => {
+        reactiveAnimationsRef.current.get(element)?.cancel();
+
+        const damping = Math.max(0.46, 1 - index * 0.07);
+        const animation = element.animate(
+          [
+            { transform: "translate3d(0, 0, 0) rotate(0deg)" },
+            {
+              offset: 0.28,
+              transform: `translate3d(${(windX * damping).toFixed(2)}px, ${(windY * 0.42 * damping).toFixed(2)}px, 0) rotate(${(windTilt * damping).toFixed(2)}deg)`,
+            },
+            {
+              offset: 0.62,
+              transform: `translate3d(${(-windX * 0.55 * damping).toFixed(2)}px, ${(-windY * 0.16 * damping).toFixed(2)}px, 0) rotate(${(-windTilt * 0.48 * damping).toFixed(2)}deg)`,
+            },
+            { transform: "translate3d(0, 0, 0) rotate(0deg)" },
+          ],
+          {
+            duration: 1200 + index * 35 + kineticEnergy * 240,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "both",
+          },
+        );
+
+        reactiveAnimationsRef.current.set(element, animation);
+      });
+
+      const orbElements = shell.querySelectorAll<HTMLElement>(windOrbSelector);
+
+      orbElements.forEach((element, index) => {
+        orbAnimationsRef.current.get(element)?.cancel();
+
+        const damping = 1 + index * 0.18;
+        const animation = element.animate(
+          [
+            { transform: "translate3d(0, 0, 0) scale(1)" },
+            {
+              offset: 0.35,
+              transform: `translate3d(${(windX * 1.4 * damping).toFixed(2)}px, ${(windY * 0.72 * damping).toFixed(2)}px, 0) scale(${(1.03 + kineticEnergy * 0.08).toFixed(3)})`,
+            },
+            {
+              offset: 0.68,
+              transform: `translate3d(${(-windX * 0.85 * damping).toFixed(2)}px, ${(-windY * 0.24 * damping).toFixed(2)}px, 0) scale(${(0.98 + kineticEnergy * 0.04).toFixed(3)})`,
+            },
+            { transform: "translate3d(0, 0, 0) scale(1)" },
+          ],
+          {
+            duration: 1700 + index * 110 + kineticEnergy * 300,
+            easing: "cubic-bezier(0.2, 0.9, 0.24, 1)",
+            fill: "both",
+          },
+        );
+
+        orbAnimationsRef.current.set(element, animation);
+      });
+
+      if (settleTimeoutRef.current !== null) {
+        globalThis.clearTimeout(settleTimeoutRef.current);
+      }
+
+      settleTimeoutRef.current = globalThis.setTimeout(() => {
+        settleWind();
+      }, 920);
+    },
+  );
+
+  const handlePointerMove = useEffectEvent(
+    (event: ReactPointerEvent<HTMLElement>) => {
+      if (event.pointerType === "touch") {
+        return;
+      }
+
+      animateWind(
+        event.clientX,
+        event.clientY,
+        event.movementX,
+        event.movementY,
+      );
+    },
+  );
+
+  const handlePointerLeave = useEffectEvent(() => {
+    settleWind();
+  });
+
+  return {
+    shellRef,
+    handlePointerLeave,
+    handlePointerMove,
+  };
+}
+
 function App() {
   const viewModel = useLandingViewModel();
+  const { shellRef, handlePointerLeave, handlePointerMove } = useWindMotion();
 
   return (
-    <main className="app-shell">
+    <main
+      ref={shellRef}
+      className="app-shell"
+      onPointerLeave={handlePointerLeave}
+      onPointerMove={handlePointerMove}
+    >
       <div className="living-atmosphere" aria-hidden="true">
         <span className="orb orb-a" />
         <span className="orb orb-b" />
         <span className="orb orb-c" />
+        <span className="gust gust-a" />
+        <span className="gust gust-b" />
       </div>
 
       <nav className="top-nav" aria-label="Navegação da página">
