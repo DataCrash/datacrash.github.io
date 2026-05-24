@@ -94,11 +94,14 @@ function useWindMotion() {
           (Math.abs(movementX) + Math.abs(movementY)) / 28,
       );
 
-      const minimumCooldown = now - lastTriggerRef.current < 360;
+      const minimumCooldown = now - lastTriggerRef.current < 288;
       const inActiveCycle = now < activeUntilRef.current;
       const strongerGust = kineticEnergy > lastEnergyRef.current * 1.22;
 
-      if ((minimumCooldown && kineticEnergy < 0.86) || (inActiveCycle && !strongerGust)) {
+      if (
+        (minimumCooldown && kineticEnergy < 0.86) ||
+        (inActiveCycle && !strongerGust)
+      ) {
         return;
       }
 
