@@ -15,7 +15,7 @@ import { SkillMatrix } from "./presentation/components/SkillMatrix";
 import { useLandingViewModel } from "./presentation/hooks/useLandingViewModel";
 
 const windReactiveSelector =
-  ".top-nav, .hero, .section-block, .dashboard-card, .footer-note";
+  ".top-nav, .hero, .section-block, .footer-note, .dashboard-card, .highlight-card, .experience-card, .route-card, .skill-card, .volunteer-card";
 const windOrbSelector = ".orb";
 
 function useWindMotion() {
