@@ -11,5 +11,8 @@ export interface ProfileDataSource {
 export interface RepositoryMetricsProvider {
   getRepositoryMetrics(
     repository: RepositoryDashboardConfig,
+    options?: {
+      forceLive?: boolean;
+    },
   ): Promise<RepositoryMetricsSnapshot>;
 }

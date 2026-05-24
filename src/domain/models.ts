@@ -48,6 +48,7 @@ export interface RepositoryMetricsSnapshot {
   openIssues: number;
   watchers: number;
   lastUpdatedAt: string;
+  source: "snapshot" | "live";
 }
 
 export interface ProfessionalProfile {

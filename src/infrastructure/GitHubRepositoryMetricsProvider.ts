@@ -63,6 +63,7 @@ export class GitHubRepositoryMetricsProvider implements RepositoryMetricsProvide
                 openIssues: repository.openIssues,
                 watchers: repository.watchers,
                 lastUpdatedAt: repository.lastUpdatedAt,
+                source: "snapshot",
               },
             );
 
@@ -97,12 +98,20 @@ export class GitHubRepositoryMetricsProvider implements RepositoryMetricsProvide
       openIssues: payload.open_issues_count,
       watchers: payload.subscribers_count,
       lastUpdatedAt: payload.pushed_at,
+      source: "live",
     };
   }
 
   async getRepositoryMetrics(
     repository: RepositoryDashboardConfig,
+    options?: {
+      forceLive?: boolean;
+    },
   ): Promise<RepositoryMetricsSnapshot> {
+    if (options?.forceLive) {
+      return this.getFromApi(repository);
+    }
+
     const key = GitHubRepositoryMetricsProvider.toKey(
       repository.owner,
       repository.name,

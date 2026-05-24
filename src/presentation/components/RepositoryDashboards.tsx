@@ -8,12 +8,34 @@ type RepositoryDashboardsProps = {
   repositories: RepositoryDashboardConfig[];
 };
 
-function DashboardCard({ item }: Readonly<{ item: RepositoryDashboardView }>) {
+function DashboardCard({
+  item,
+  onRefreshLive,
+}: Readonly<{
+  item: RepositoryDashboardView;
+  onRefreshLive: (repository: RepositoryDashboardConfig) => void;
+}>) {
+  const sourceLabels: Record<RepositoryDashboardView["source"], string> = {
+    live: "Ao vivo",
+    snapshot: "Snapshot",
+    unknown: "Indisponível",
+  };
+
+  const sourceLabel = sourceLabels[item.source];
+
+  const shouldShowRefreshButton =
+    item.source === "snapshot" && item.status !== "loading";
+
   return (
     <article className={`dashboard-card status-${item.status}`}>
       <header className="dashboard-header">
         <h3>{item.repository.label}</h3>
-        <span className="dashboard-badge">Pulse {item.pulseScore}</span>
+        <div className="dashboard-header-badges">
+          <span className={`dashboard-source source-${item.source}`}>
+            {sourceLabel}
+          </span>
+          <span className="dashboard-badge">Pulse {item.pulseScore}</span>
+        </div>
       </header>
       <p className="dashboard-description">{item.repository.description}</p>
 
@@ -38,9 +60,20 @@ function DashboardCard({ item }: Readonly<{ item: RepositoryDashboardView }>) {
 
       <div className="dashboard-footer">
         <small>Atualizado: {item.lastUpdatedLabel}</small>
-        <a href={item.repository.href} target="_blank" rel="noreferrer">
-          Abrir repositório
-        </a>
+        <div className="dashboard-actions">
+          {shouldShowRefreshButton ? (
+            <button
+              type="button"
+              className="dashboard-live-button"
+              onClick={() => onRefreshLive(item.repository)}
+            >
+              Trazer ao vivo
+            </button>
+          ) : null}
+          <a href={item.repository.href} target="_blank" rel="noreferrer">
+            Abrir repositório
+          </a>
+        </div>
       </div>
     </article>
   );
@@ -49,7 +82,8 @@ function DashboardCard({ item }: Readonly<{ item: RepositoryDashboardView }>) {
 export function RepositoryDashboards({
   repositories,
 }: Readonly<RepositoryDashboardsProps>) {
-  const { items, hasLoading } = useRepositoryDashboards(repositories);
+  const { items, hasLoading, refreshRepositoryLive } =
+    useRepositoryDashboards(repositories);
 
   return (
     <div className="dashboard-grid" aria-live="polite">
@@ -57,6 +91,7 @@ export function RepositoryDashboards({
         <DashboardCard
           key={`${item.repository.owner}/${item.repository.name}`}
           item={item}
+          onRefreshLive={refreshRepositoryLive}
         />
       ))}
       {hasLoading ? (

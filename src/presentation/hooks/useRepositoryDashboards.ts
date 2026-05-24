@@ -4,6 +4,7 @@ import type { RepositoryDashboardConfig } from "../../domain/models";
 import { GitHubRepositoryMetricsProvider } from "../../infrastructure/GitHubRepositoryMetricsProvider";
 
 type DashboardStatus = "idle" | "loading" | "ready" | "error";
+type DashboardSource = "snapshot" | "live" | "unknown";
 
 export type RepositoryDashboardView = {
   repository: RepositoryDashboardConfig;
@@ -14,6 +15,7 @@ export type RepositoryDashboardView = {
   pulseScore: number;
   lastUpdatedLabel: string;
   status: DashboardStatus;
+  source: DashboardSource;
 };
 
 function formatDate(value: string): string {
@@ -51,6 +53,7 @@ export function useRepositoryDashboards(
       pulseScore: 0,
       lastUpdatedLabel: "carregando...",
       status: "idle",
+      source: "unknown",
     })),
   );
 
@@ -76,6 +79,7 @@ export function useRepositoryDashboards(
             ),
             lastUpdatedLabel: formatDate(metrics.lastUpdatedAt),
             status: "ready" as const,
+            source: metrics.source,
           };
         } catch {
           return {
@@ -87,6 +91,7 @@ export function useRepositoryDashboards(
             pulseScore: 0,
             lastUpdatedLabel: "indisponível",
             status: "error" as const,
+            source: "unknown" as const,
           };
         }
       }),
@@ -103,6 +108,76 @@ export function useRepositoryDashboards(
     };
   }, [repositories]);
 
+  async function refreshRepositoryLive(target: RepositoryDashboardConfig) {
+    const provider = new GitHubRepositoryMetricsProvider();
+    const targetKey = `${target.owner}/${target.name}`.toLowerCase();
+
+    setItems((previousItems) =>
+      previousItems.map((item) => {
+        const itemKey =
+          `${item.repository.owner}/${item.repository.name}`.toLowerCase();
+
+        if (itemKey !== targetKey) {
+          return item;
+        }
+
+        return {
+          ...item,
+          status: "loading",
+        };
+      }),
+    );
+
+    try {
+      const metrics = await provider.getRepositoryMetrics(target, {
+        forceLive: true,
+      });
+
+      setItems((previousItems) =>
+        previousItems.map((item) => {
+          const itemKey =
+            `${item.repository.owner}/${item.repository.name}`.toLowerCase();
+
+          if (itemKey !== targetKey) {
+            return item;
+          }
+
+          return {
+            ...item,
+            stars: metrics.stars,
+            forks: metrics.forks,
+            openIssues: metrics.openIssues,
+            watchers: metrics.watchers,
+            pulseScore: calculatePulseScore(
+              metrics.stars,
+              metrics.forks,
+              metrics.watchers,
+            ),
+            lastUpdatedLabel: formatDate(metrics.lastUpdatedAt),
+            status: "ready",
+            source: metrics.source,
+          };
+        }),
+      );
+    } catch {
+      setItems((previousItems) =>
+        previousItems.map((item) => {
+          const itemKey =
+            `${item.repository.owner}/${item.repository.name}`.toLowerCase();
+
+          if (itemKey !== targetKey) {
+            return item;
+          }
+
+          return {
+            ...item,
+            status: "error",
+          };
+        }),
+      );
+    }
+  }
+
   const hasLoading = useMemo(
     () =>
       items.some((item) => item.status === "loading" || item.status === "idle"),
@@ -112,5 +187,6 @@ export function useRepositoryDashboards(
   return {
     items,
     hasLoading,
+    refreshRepositoryLive,
   };
 }
