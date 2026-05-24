@@ -23,6 +23,9 @@ function useWindMotion() {
   const reactiveAnimationsRef = useRef(new Map<HTMLElement, Animation>());
   const orbAnimationsRef = useRef(new Map<HTMLElement, Animation>());
   const settleTimeoutRef = useRef<number | null>(null);
+  const accumulatedMotionRef = useRef(0);
+  const activeUntilRef = useRef(0);
+  const lastEnergyRef = useRef(0);
   const lastTriggerRef = useRef(0);
   const reducedMotionRef = useRef(false);
 
@@ -82,12 +85,6 @@ function useWindMotion() {
 
       const now = globalThis.performance.now();
 
-      if (now - lastTriggerRef.current < 110) {
-        return;
-      }
-
-      lastTriggerRef.current = now;
-
       const rect = shell.getBoundingClientRect();
       const normalizedX = (clientX - rect.left) / rect.width - 0.5;
       const normalizedY = (clientY - rect.top) / rect.height - 0.5;
@@ -96,9 +93,21 @@ function useWindMotion() {
         Math.hypot(normalizedX, normalizedY) * 1.7 +
           (Math.abs(movementX) + Math.abs(movementY)) / 28,
       );
-      const windX = normalizedX * (18 + kineticEnergy * 10);
-      const windY = normalizedY * (10 + kineticEnergy * 6);
-      const windTilt = normalizedX * (3 + kineticEnergy * 2.5);
+
+      const minimumCooldown = now - lastTriggerRef.current < 360;
+      const inActiveCycle = now < activeUntilRef.current;
+      const strongerGust = kineticEnergy > lastEnergyRef.current * 1.22;
+
+      if ((minimumCooldown && kineticEnergy < 0.86) || (inActiveCycle && !strongerGust)) {
+        return;
+      }
+
+      lastTriggerRef.current = now;
+      lastEnergyRef.current = kineticEnergy;
+
+      const windX = normalizedX * (22 + kineticEnergy * 14);
+      const windY = normalizedY * (12 + kineticEnergy * 9);
+      const windTilt = normalizedX * (3.8 + kineticEnergy * 3.1);
 
       shell.style.setProperty("--wind-x", `${windX.toFixed(2)}px`);
       shell.style.setProperty("--wind-y", `${windY.toFixed(2)}px`);
@@ -170,7 +179,9 @@ function useWindMotion() {
 
       settleTimeoutRef.current = globalThis.setTimeout(() => {
         settleWind();
-      }, 920);
+      }, 1420);
+
+      activeUntilRef.current = now + 1200 + kineticEnergy * 380;
     },
   );
 
@@ -179,6 +190,17 @@ function useWindMotion() {
       if (event.pointerType === "touch") {
         return;
       }
+
+      accumulatedMotionRef.current += Math.hypot(
+        event.movementX,
+        event.movementY,
+      );
+
+      if (accumulatedMotionRef.current < 15) {
+        return;
+      }
+
+      accumulatedMotionRef.current = 0;
 
       animateWind(
         event.clientX,
@@ -190,6 +212,7 @@ function useWindMotion() {
   );
 
   const handlePointerLeave = useEffectEvent(() => {
+    accumulatedMotionRef.current = 0;
     settleWind();
   });
 
