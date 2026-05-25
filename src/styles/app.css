@@ -1,8 +1,4 @@
 .app-shell {
-  --wind-x: 0px;
-  --wind-y: 0px;
-  --wind-tilt: 0deg;
-  --wind-energy: 0;
   position: relative;
   overflow: hidden;
   width: min(1180px, calc(100% - 2rem));
@@ -15,28 +11,6 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  transform: translate3d(
-    calc(var(--wind-x) * 0.14),
-    calc(var(--wind-y) * 0.1),
-    0
-  );
-  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.living-atmosphere::before {
-  content: "";
-  position: absolute;
-  inset: 6% 8%;
-  border-radius: 999px;
-  background: linear-gradient(
-    110deg,
-    transparent 10%,
-    rgba(255, 255, 255, 0.035) 35%,
-    rgba(89, 212, 255, 0.08) 50%,
-    transparent 72%
-  );
-  filter: blur(30px);
-  opacity: calc(0.24 + var(--wind-energy) * 0.18);
 }
 
 .orb {
@@ -73,44 +47,6 @@
   animation-delay: 2.2s;
 }
 
-.gust {
-  position: absolute;
-  height: 1px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(214, 244, 255, 0.48),
-    transparent
-  );
-  opacity: calc(0.18 + var(--wind-energy) * 0.22);
-  filter: blur(0.2px);
-  transform-origin: center;
-  animation: stream-gust 11s linear infinite;
-}
-
-.gust::after {
-  content: "";
-  position: absolute;
-  inset: -0.45rem 0;
-  background: inherit;
-  filter: blur(12px);
-  opacity: 0.5;
-}
-
-.gust-a {
-  top: 18%;
-  left: 6%;
-  width: 20rem;
-}
-
-.gust-b {
-  top: 58%;
-  right: 4%;
-  width: 15rem;
-  animation-delay: -4.2s;
-}
-
 .top-nav {
   position: sticky;
   top: 0.8rem;
@@ -133,8 +69,6 @@
 .dashboard-card {
   position: relative;
   z-index: 1;
-  transform-origin: center top;
-  will-change: transform;
 }
 
 .top-nav a {
@@ -570,20 +504,6 @@
 
   50% {
     transform: translateY(-12px) translateX(10px) scale(1.08);
-  }
-}
-
-@keyframes stream-gust {
-  0% {
-    transform: translate3d(-4%, 0, 0) rotate(calc(var(--wind-tilt) * 0.18));
-  }
-
-  50% {
-    transform: translate3d(6%, -8px, 0) rotate(calc(var(--wind-tilt) * 0.34));
-  }
-
-  100% {
-    transform: translate3d(18%, 0, 0) rotate(calc(var(--wind-tilt) * 0.18));
   }
 }
 
