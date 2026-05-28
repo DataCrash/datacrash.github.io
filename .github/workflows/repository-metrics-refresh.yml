@@ -31,8 +31,7 @@ jobs:
       - name: Refresh metrics data
         run: npm run data:refresh
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PUBLIC_DATA_TOKEN }}
-          GH_PUBLIC_DATA_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Commit and push when changed
         run: |
