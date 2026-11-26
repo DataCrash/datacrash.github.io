@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T10:50:39.938Z",
+  "generatedAt": "2026-11-26T10:24:15.715Z",
   "source": {
     "note": "Dados gerados por script CI para evitar limite de rate no cliente",
     "tokenConfigured": true
@@ -12,7 +12,7 @@
       "forks": 0,
       "openIssues": 0,
       "watchers": 0,
-      "lastUpdatedAt": "2026-11-24T11:58:23Z"
+      "lastUpdatedAt": "2026-11-25T10:50:41Z"
     },
     {
       "owner": "DataCrash",
@@ -21,7 +21,7 @@
       "forks": 0,
       "openIssues": 0,
       "watchers": 0,
-      "lastUpdatedAt": "2026-11-24T12:13:26Z"
+      "lastUpdatedAt": "2026-11-25T11:01:20Z"
     },
     {
       "owner": "DataCrash",
@@ -30,7 +30,7 @@
       "forks": 0,
       "openIssues": 0,
       "watchers": 0,
-      "lastUpdatedAt": "2026-11-24T22:16:09Z"
+      "lastUpdatedAt": "2026-11-25T21:32:49Z"
     }
   ]
 }
